@@ -10,9 +10,12 @@
 
 
 /* ---- Base Rules ---- */
+
+/* make transition smooth */
 html{
     scroll-behavior: smooth;
 }
+
 body {
     background: rgb(136,203,171);
     background: linear-gradient(0deg, rgba(136,203,171,1) 0%, rgba(0,13,60,1) 100%);
@@ -76,10 +79,7 @@ section {
 .navbar__menu li {
     display: inline-block;
 }
-/*.navbar__menu a.active {
-    background-color: #04AA6D;
-  }
-*/
+
 .navbar__menu .menu__link {
     display: block;
     padding: 1em;
@@ -94,6 +94,15 @@ section {
     transition: ease 0.3s all;
 }
 
+.active{
+    display: block;
+    padding: 1em;
+    font-weight: bold;
+    text-decoration: none;
+    background: #333;
+    color: #fff;
+    transition: ease 0.3s all;
+}
 /* Header Styles */
 .page__header {
     background: #fff;

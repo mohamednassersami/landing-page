@@ -75,6 +75,7 @@
 const Sections = document.querySelectorAll('section');
 const navbarList = document.getElementById('navbar__list');
 
+
 function populateNavBarMenu(){
     for(const section of Sections){
         const menuList = document.createElement('li');
@@ -87,5 +88,59 @@ function populateNavBarMenu(){
         navbarList.appendChild(menuList);
     }
 }
-populateNavBarMenu();
 
+function activeSectionNavbarHighlighted(){
+    const allAnchors = document.querySelectorAll('a');
+    for(let i=0;i<allAnchors.length;i++){
+        switch(allAnchors[i].innerText){
+            case 'section1':
+                allAnchors[i].setAttribute('class',"active");
+                allAnchors[i].addEventListener('click',function(){
+                    allAnchors[i].setAttribute('class',"active");
+                    for(let i=1;i<allAnchors.length;i++){
+                        allAnchors[i].setAttribute('class',"menu__link");
+                    }
+                });
+                break;
+            case 'section2':
+                allAnchors[i].addEventListener('click',function(){
+                    allAnchors[i].setAttribute('class',"active");
+                    for(let i=0;i<allAnchors.length;i++){
+                        if(i === 1){
+                            continue;
+                        }else{
+                            allAnchors[i].setAttribute('class',"menu__link");
+                        }
+                    }
+                });
+                break;
+            case 'section3':
+                allAnchors[i].addEventListener('click',function(){
+                    allAnchors[i].setAttribute('class',"active");
+                    for(let i=0;i<allAnchors.length;i++){
+                        if(i === 2){
+                            continue;
+                        }else{
+                            allAnchors[i].setAttribute('class',"menu__link");
+                        }
+                    }
+                });
+                break;
+            case 'section4':
+                allAnchors[i].addEventListener('click',function(){
+                    allAnchors[i].setAttribute('class',"active");
+                    for(let i=0;i<allAnchors.length;i++){
+                        if(i === 3){
+                            continue;
+                        }else{
+                            allAnchors[i].setAttribute('class',"menu__link");
+                        }
+                    }
+                });
+                break;
+        }
+    }
+}
+
+populateNavBarMenu();
+activeSectionNavbarHighlighted();
