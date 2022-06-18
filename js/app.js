@@ -54,45 +54,126 @@
 // Set sections as active
 
 const Sections = document.querySelectorAll("section");
-const navbarList = document.getElementById("navbar__list");
+const mainNavbarList = document.getElementById("navbar__list");
+const mainHeader = document.getElementById("mainHeader");
 
 function populateNavBarMenu() {
   const fragment = document.createDocumentFragment();
   for (const section of Sections) {
-    const menuList = document.createElement("li");
-    const menuLink = document.createElement("a");
-    menuLink.innerHTML = section.id;
-    menuLink.setAttribute("href", `#${section.id}`);
-    menuLink.setAttribute("class", "menu__link");
-    menuLink.classList.add("menu__link");
-    menuList.append(menuLink);
-    fragment.appendChild(menuList);
+    const navbarList = document.createElement("li");
+    const navbarAnchor = document.createElement("a");
+    navbarAnchor.innerHTML = section.id;
+    navbarAnchor.style.cursor = "pointer";
+    navbarAnchor.classList.add("menu__link");
+    navbarList.appendChild(navbarAnchor);
+    fragment.appendChild(navbarList);
   }
-  navbarList.appendChild(fragment);
+  mainNavbarList.append(fragment);
 }
 
-function setNavLinkClassName(anchor, allAnchors, secID) {
+function activateClasses(allAnchors, Sections) {
+  allAnchors.classList.remove("menu__link");
+  allAnchors.classList.add("active");
+  Sections.classList.add("your-active-class");
+}
+
+function deactivateClasses(allAnchors, Sections) {
+  allAnchors.classList.remove("active");
+  allAnchors.classList.add("menu__link");
+  Sections.classList.remove("your-active-class");
+}
+
+function setClassesName(allAnchors, index) {
   for (let i = 0; i < allAnchors.length; i++) {
-    if (i === secID) {
-      allAnchors[secID].classList.remove("menu__link");
-      allAnchors[secID].classList.add("active");
+    if (i === index) {
+      activateClasses(allAnchors[i], Sections[i]);
     } else {
-      allAnchors[i].classList.remove("active");
-      allAnchors[i].classList.add("menu__link");
+      deactivateClasses(allAnchors[i], Sections[i]);
     }
   }
 }
 
-function activeSectionNavbarHighlighted() {
+function activeNavbarHighlighted() {
   const allAnchors = document.querySelectorAll("a");
+  activateClasses(allAnchors[0], Sections[0]);
   for (let i = 0; i < allAnchors.length; i++) {
     if (allAnchors[i].innerText === Sections[i].id) {
-      allAnchors[i].addEventListener("click", function () {
-        setNavLinkClassName(allAnchors[i], allAnchors, i);
+      allAnchors[i].addEventListener("click", function (event) {
+        event.preventDefault();
+        setClassesName(allAnchors, i);
+        Sections[i].scrollIntoView();
+        //allAnchors[i].href = `#${Sections[i].id}`;
       });
     }
   }
 }
 
+function scrollToTop() {
+  var upButton = document.getElementById("upButton");
+  window.addEventListener("scroll", function () {
+    if (this.window.scrollY > 50) {
+      upButton.style.display = "block";
+    } else {
+      upButton.style.display = "none";
+    }
+  });
+  upButton.addEventListener("click", function () {
+    window.scrollTo(top);
+  });
+}
+
+function hideNavigationBar() {
+  let timer = null;
+  setTimeout(function () {
+    mainHeader.style.top = "-50px";
+  }, 2000);
+  window.addEventListener("scroll", function () {
+    mainHeader.style.top = "0";
+    if (timer !== null) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(function () {
+      mainHeader.style.top = "-50px";
+    }, 2000);
+  });
+}
+
+function sectionInViewport(section) {
+  const rect = section.getBoundingClientRect();
+  return rect.top >= 0 && rect.bottom <= window.innerHeight;
+}
+
+function activeHisAnchor() {
+  const anchors = document.querySelectorAll("a");
+  window.addEventListener("scroll", function () {
+    for (let i = 0; i < anchors.length; i++) {
+      if (sectionInViewport(Sections[i])) {
+        setClassesName(anchors, i);
+      }
+    }
+  });
+}
+
+function collapsing() {
+  const collapse = document.getElementsByClassName("collapsible");
+  for (let i = 0; i < collapse.length; i++) {
+    collapse[i].addEventListener("click", function () {
+      collapse[i].classList.add("activeCollapsible");
+      var content = collapse[i].nextElementSibling;
+      if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+        collapse[i].classList.remove("activeCollapsible");
+        collapse[i].classList.add("collapsible");
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    });
+  }
+}
+
 populateNavBarMenu();
-activeSectionNavbarHighlighted();
+activeNavbarHighlighted();
+scrollToTop();
+hideNavigationBar();
+activeHisAnchor();
+collapsing();

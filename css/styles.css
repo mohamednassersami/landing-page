@@ -66,6 +66,33 @@ section {
     min-height: 80vh;
 }
 
+.collapsible {
+    cursor: pointer;
+}
+
+.collapsible:hover {
+  background-color: #555;
+}
+
+.collapsible:after {
+    content: "...more";
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+    font-size: 20px;
+    float: right;
+    margin-left: 20px;
+  }
+
+  .activeCollapsible:after{
+    content: "...less";
+  }
+  
+  .content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #490202;
+  }
 
 /* ---- Module Rules ---- */
 
@@ -110,6 +137,7 @@ section {
     top: 0;
     width: 100%;
     z-index: 5;
+    transition-duration: 0.5s;
 }
 
 /* Footer Styles */
@@ -236,3 +264,25 @@ section.your-active-class .landing__container::after {
 		           rotate(-360deg);
 	}
 }
+
+#upButton {
+    text-align: center;
+    font-size: 18px;
+    color: whitesmoke;
+    background-color:#555 ;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    border-style: dashed;
+    border-color: black;
+    border-width: 3px;
+    position: fixed;
+    bottom: 15px;
+    right: 20px;
+    z-index: 100;
+    display: none;
+  }
+  
+  #upButton:hover {
+    background-color: #333;
+  }
