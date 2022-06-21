@@ -21,7 +21,7 @@ body {
     background: linear-gradient(0deg, rgba(136,203,171,1) 0%, rgba(0,13,60,1) 100%);
     margin: 0;
     font-family: 'Merriweather', serif;
-    color: #fff;
+    color: rgb(169, 69, 69);
 }
 
 
@@ -40,10 +40,10 @@ h1 {
 }
 
 h2 {
-    border-bottom: 1px solid #cc1;
+    border-bottom: 1px solid rgb(204, 104, 17);
     font-family: 'Oxygen', Sans-Serif;
     font-size: 3em;
-    color: #fff;
+    color: rgb(218, 246, 7);
 }
 
 p {
@@ -77,7 +77,7 @@ section {
 }
 
 .collapsible:after {
-    content: "...more";
+    content: '...more';
     color: rgb(255, 0, 0);
     font-weight: bold;
     font-size: 20px;
@@ -86,13 +86,14 @@ section {
   }
 
   .activeCollapsible:after{
-    content: "...less";
+    content: '...less';
   }
   
   .content {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
+    color: #eee;
     background-color: #490202;
   }
 
@@ -141,7 +142,7 @@ section {
     padding: 1em;
     font-weight: bold;
     text-decoration: none;
-    color: #000;
+    color: rgb(0, 0, 0);
 }
 
 .navbar__menu .menu__link:hover {
@@ -155,13 +156,14 @@ section {
     padding: 1em;
     font-weight: bold;
     text-decoration: none;
-    background: #333;
+    background: rgb(17, 48, 131);
     color: #fff;
     transition: ease 0.3s all;
 }
+
 /* Header Styles */
 .page__header {
-    background: #fff;
+    background: rgb(244, 116, 3);
     position: fixed;
     top: 0;
     width: 100%;
@@ -176,7 +178,7 @@ section {
 
 /* Footer Styles */
 .page__footer {
-    background: #000;
+    background: rgb(157, 28, 28);
     padding: 3em;
     color: #fff;
 }
@@ -211,7 +213,7 @@ section:nth-of-type(even) .landing__container {
 /* Circles appear to be random do to use of :nth-of-type psuedo class */
 section:nth-of-type(odd) .landing__container::before {
     content: '';
-    background: rgba(255, 255, 255, 0.187);
+    background: rgba(117, 49, 49, 0.187);
     position: absolute;
     z-index: -5;
     width: 20vh;
