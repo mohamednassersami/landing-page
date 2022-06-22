@@ -4,7 +4,7 @@
 const Sections = document.querySelectorAll('section');
 const mainNavbarList = document.getElementById('navbar__list');
 const mainHeader = document.getElementById('mainHeader');
-let enableScroll = true;
+
 
 /* Helper Functions */
 
@@ -83,12 +83,10 @@ function activeNavbarHighlighted() {
   for (let i = 0; i < allAnchors.length; i++) {
     if (allAnchors[i].innerText === Sections[i].id) {
       allAnchors[i].addEventListener('click', function (event) {
-        enableScroll = false;
         event.preventDefault();
         setClassesName(allAnchors, i);
-        Sections[i].scrollIntoView();
-        enableScroll = true;
-      });
+        Sections[i].scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+      },true);
     }
   }
 }
@@ -99,13 +97,11 @@ function activeNavbarHighlighted() {
 function activeHisAnchor() {
   const anchors = document.querySelectorAll('a');
   window.addEventListener('scroll', function () {
-    if (enableScroll) {
       for (let i = 0; i < anchors.length; i++) {
         if (sectionInViewport(Sections[i])) {
           setClassesName(anchors, i);
         }
       }
-    }
   });
 }
 
@@ -166,8 +162,8 @@ function collapsing() {
 }
 
 populateNavBarMenu();
-activeHisAnchor();
 activeNavbarHighlighted();
 scrollToTop();
 hideNavigationBar();
+activeHisAnchor();
 collapsing();
