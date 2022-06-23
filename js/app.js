@@ -1,10 +1,9 @@
 /**
  * Global variables
  */
-const Sections = document.querySelectorAll('section');
-const mainNavbarList = document.getElementById('navbar__list');
-const mainHeader = document.getElementById('mainHeader');
-
+const Sections = document.querySelectorAll("section");
+const mainNavbarList = document.getElementById("navbar__list");
+const mainHeader = document.getElementById("mainHeader");
 
 /* Helper Functions */
 
@@ -14,9 +13,9 @@ const mainHeader = document.getElementById('mainHeader');
  * @param {Node} Sections - The section that i need to activate
  */
 function activateClasses(allAnchors, Sections) {
-  allAnchors.classList.remove('menu__link');
-  allAnchors.classList.add('active');
-  Sections.classList.add('your-active-class');
+  allAnchors.classList.remove("menu__link");
+  allAnchors.classList.add("active");
+  Sections.classList.add("your-active-class");
 }
 
 /**
@@ -25,9 +24,9 @@ function activateClasses(allAnchors, Sections) {
  * @param {Node} Sections - The sections that i need to deactivate
  */
 function deactivateClasses(allAnchors, Sections) {
-  allAnchors.classList.remove('active');
-  allAnchors.classList.add('menu__link');
-  Sections.classList.remove('your-active-class');
+  allAnchors.classList.remove("active");
+  allAnchors.classList.add("menu__link");
+  Sections.classList.remove("your-active-class");
 }
 
 /**
@@ -63,11 +62,11 @@ function sectionInViewport(section) {
 function populateNavBarMenu() {
   const fragment = document.createDocumentFragment();
   for (const section of Sections) {
-    const navbarList = document.createElement('li');
-    const navbarAnchor = document.createElement('a');
+    const navbarList = document.createElement("li");
+    const navbarAnchor = document.createElement("a");
     navbarAnchor.innerHTML = section.id;
-    navbarAnchor.style.cursor = 'pointer';
-    navbarAnchor.classList.add('menu__link');
+    navbarAnchor.style.cursor = "pointer";
+    navbarAnchor.classList.add("menu__link");
     navbarList.appendChild(navbarAnchor);
     fragment.appendChild(navbarList);
   }
@@ -78,16 +77,18 @@ function populateNavBarMenu() {
  * @description Highlighted anchor when click on it and view his section
  */
 function activeNavbarHighlighted() {
-  const allAnchors = document.querySelectorAll('a');
+  const allAnchors = document.querySelectorAll("a");
   activateClasses(allAnchors[0], Sections[0]);
   for (let i = 0; i < allAnchors.length; i++) {
-    if (allAnchors[i].innerText === Sections[i].id) {
-      allAnchors[i].addEventListener('click', function (event) {
-        event.preventDefault();
-        setClassesName(allAnchors, i);
-        Sections[i].scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
-      },true);
-    }
+    allAnchors[i].addEventListener("click", function (event) {
+      event.preventDefault();
+      setClassesName(allAnchors, i);
+      Sections[i].scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "nearest",
+      });
+    });
   }
 }
 
@@ -95,13 +96,13 @@ function activeNavbarHighlighted() {
  * @description Active the anchor when his section in the viewport
  */
 function activeHisAnchor() {
-  const anchors = document.querySelectorAll('a');
-  window.addEventListener('scroll', function () {
-      for (let i = 0; i < anchors.length; i++) {
-        if (sectionInViewport(Sections[i])) {
-          setClassesName(anchors, i);
-        }
+  const anchors = document.querySelectorAll("a");
+  window.addEventListener("scroll", function () {
+    for (let i = 0; i < anchors.length; i++) {
+      if (sectionInViewport(Sections[i])) {
+        setClassesName(anchors, i);
       }
+    }
   });
 }
 
@@ -109,15 +110,15 @@ function activeHisAnchor() {
  * @description show button (up) when scrolling and scroll to top when click on it
  */
 function scrollToTop() {
-  const upButton = document.getElementById('upButton');
-  window.addEventListener('scroll', function () {
+  const upButton = document.getElementById("upButton");
+  window.addEventListener("scroll", function () {
     if (this.window.scrollY > 50) {
-      upButton.style.display = 'block';
+      upButton.style.display = "block";
     } else {
-      upButton.style.display = 'none';
+      upButton.style.display = "none";
     }
   });
-  upButton.addEventListener('click', function () {
+  upButton.addEventListener("click", function () {
     window.scrollTo(top);
   });
 }
@@ -128,15 +129,15 @@ function scrollToTop() {
 function hideNavigationBar() {
   let timer = null;
   setTimeout(function () {
-    mainHeader.classList.add('hide');
+    mainHeader.classList.add("hide");
   }, 2000);
-  window.addEventListener('scroll', function () {
-    mainHeader.classList.remove('hide');
+  window.addEventListener("scroll", function () {
+    mainHeader.classList.remove("hide");
     if (timer !== null) {
       clearTimeout(timer);
     }
     timer = setTimeout(function () {
-      mainHeader.classList.add('hide');
+      mainHeader.classList.add("hide");
     }, 2000);
   });
 }
@@ -145,17 +146,17 @@ function hideNavigationBar() {
  * @description Make sections collapsible when pressing (...more) they open and when pressing (...lower) they close
  */
 function collapsing() {
-  const collapse = document.getElementsByClassName('collapsible');
+  const collapse = document.getElementsByClassName("collapsible");
   for (let i = 0; i < collapse.length; i++) {
-    collapse[i].addEventListener('click', function () {
-      collapse[i].classList.add('activeCollapsible');
+    collapse[i].addEventListener("click", function () {
+      collapse[i].classList.add("activeCollapsible");
       const content = collapse[i].nextElementSibling;
       if (content.style.maxHeight) {
         content.style.maxHeight = null;
-        collapse[i].classList.remove('activeCollapsible');
-        collapse[i].classList.add('collapsible');
+        collapse[i].classList.remove("activeCollapsible");
+        collapse[i].classList.add("collapsible");
       } else {
-        content.style.maxHeight = content.scrollHeight + 'px';
+        content.style.maxHeight = content.scrollHeight + "px";
       }
     });
   }
