@@ -45,13 +45,16 @@ function setClassesName(allAnchors, index) {
 }
 
 /**
- * @description Determine whether the section is visible on the viewport or not
+ * @description Determine whether the section is visible on the viewport or not (responsive)
  * @param {Node} section
  * @returns boolean value (true or false)
  */
 function sectionInViewport(section) {
   const rect = section.getBoundingClientRect();
-  return rect.top >= 0 && rect.bottom <= window.innerHeight;
+  return (
+    window.pageYOffset >= section.offsetTop - 200 &&
+    window.pageYOffset < section.offsetTop + section.clientHeight - 200
+  );
 }
 
 /* Main Functions */
