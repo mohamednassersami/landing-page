@@ -50,11 +50,12 @@ function setClassesName(allAnchors, index) {
  * @returns boolean value (true or false)
  */
 function sectionInViewport(section) {
-  const rect = section.getBoundingClientRect();
   return (
     window.pageYOffset >= section.offsetTop - 200 &&
     window.pageYOffset < section.offsetTop + section.clientHeight - 200
   );
+  // const rect = section.getBoundingClientRect();
+  // return rect.top >= 0 && rect.bottom <= window.outerHeight + 300;
 }
 
 /* Main Functions */
